@@ -6,9 +6,11 @@
 
 ## Lightweight `no_std` Low-Pass Filter for Embedded Systems
 
-**lowpassns** is a small, efficient, and robust **first-order low-pass filter** crate for `no_std` Rust environments. Designed for embedded systems like RP2040 or STM32, it smooths sensor readings or signals in real-time while being memory- and CPU-efficient.  
+**lowpassns** is a small, efficient, and robust **first-order low-pass filter** crate for `no_std` Rust environments. Designed for embedded systems like RP2040 or STM32, it smooths sensor readings or signals in real-time while being memory- and CPU-efficient. 
 
-GPL-2.0-or-later licensed to ensure open and free usage in both hobbyist and commercial projects.  
+
+# Update 
+#![forbid(unsafe_code)] for safety and opt-level = 3 for speed 
 
 ---
 
@@ -37,20 +39,21 @@ GPL-2.0-or-later licensed to ensure open and free usage in both hobbyist and com
 
 Add to your `Cargo.toml`:
 
-```toml
+````toml
 [dependencies]
-lowpassns = { git = "https://github.com/jorgeandrecastro/lowpassns.git" }
+lowpassns = lowpassns = "0.2.0"
 
 
 Enable f32 for constrained MCUs:
 
-lowpassns = { git = "https://github.com/jorgeandrecastro/lowpassns.git", features = ["f32"] }
-
+lowpassns = { version="0.2.0", features = ["f32"] }
+```` 
 Build with optimizations:
 
 cargo build --release
 
-🚀 Quickstart
+# 🚀 Quickstart
+````rust
 use lowpassns::LowPass1;
 
 fn main() {
@@ -67,7 +70,8 @@ fn main() {
 
     filter.reset(0.0); // Reset the filter state
 }
-📚 API Reference
+````
+# 📚 API Reference
 | Method   | Signature                                             | Description                              |
 | -------- | ----------------------------------------------------- | ---------------------------------------- |
 | `new`    | `LowPass1::new(initial: Float, tau: Float)`           | Creates a new low-pass filter.           |
@@ -77,8 +81,8 @@ fn main() {
 
 Type Float = f64 (default) or f32 via feature flag.
 
-⚡ Performance & Optimization
-Minimal binary size
+# ⚡ Performance & Optimization
+Speed opt-level = 3  
 CPU cost: constant time O(1) per update
 Stack-only, zero allocations
 Ideal for 100 Hz – 10 kHz control loops on MCUs
@@ -93,7 +97,7 @@ Reset functionality
 Run:
 
 cargo test -- --nocapture
-⚖️ License
+# ⚖️ License
 
 GPL-2.0-or-later © 2026 Jorge Andre Castro.
 
